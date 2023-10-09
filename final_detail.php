@@ -1,7 +1,11 @@
 <?php
+session_start();
+
+
 $id = $_GET["id"];
 
 include("final_funcs.php");
+sschk();
 $pdo = db_conn();
 
 $stmt = $pdo->prepare("SELECT * FROM gs_final_table WHERE id = :id");

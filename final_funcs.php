@@ -40,6 +40,15 @@ function redirect($file_name){
 }
 
 
+//セッションチェック
+function sschk(){
+    if(!isset($_SESSION["chk_ssid"]) || $_SESSION["chk_ssid"]!=session_id()){
+        exit("ログインエラー");
+    }else{
+        session_regenerate_id(true);
+        $_SESSION["chk_ssid"] = session_id();
+    }
+}
 
 
 

@@ -1,6 +1,10 @@
 <?php
+session_start();
+
+
 //1. DB接続します
 include("final_funcs.php");
+sschk();
 $pdo = db_conn();
 
 
@@ -48,6 +52,7 @@ if($status==false) {
     <div class="container-fluid">
       <div class="navbar-header">
       <a class="navbar-brand" href="final_index.php">データ登録</a>
+      <a class="navbar-brand" href="final_logout.php">ログアウト</a>
       </div>
     </div>
   </nav>

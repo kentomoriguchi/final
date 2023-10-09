@@ -6,13 +6,8 @@ $name = $_POST['name'];
 
 
 //2. DB接続します
-try {
-  //Password:MAMP='root',XAMPP=''
-  $pdo = new PDO('mysql:dbname=gs_final;charset=utf8;host=localhost','root','');
-  //$pdo = new PDO('mysql:dbname=orchidrhino2_gs_book;charset=utf8;host=mysql57.orchidrhino2.sakura.ne.jp','orchidrhino2','kentetsuya69');
-} catch (PDOException $e) {
-  exit('DB Connection Error:'.$e->getMessage());
-}
+include("final_funcs.php");
+$pdo = db_conn();
 
 
 //３．データ登録SQL作成
@@ -23,11 +18,10 @@ $status = $stmt->execute();
 //４．データ登録処理後
 if($status==false){
   //SQL実行時にエラーがある場合（エラーオブジェクト取得して表示）
-  $error = $stmt->errorInfo();
-  exit("SQL_Error:".$error[2]);
+  sql_error($stmt);
 }else{
   //５．index.phpへリダイレクト
-  header("Location: final_index.php");
+  redirect("final_index.php");
   exit();
 }
 ?>

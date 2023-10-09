@@ -16,19 +16,20 @@ $status = $stmt->execute();
 //３．データ表示
 $view="";
 if($status==false) {
-  //execute（SQL実行時にエラーがある場合）
   sql_error($stmt);
 }else{
-  //Selectデータの数だけ自動でループしてくれる
-  //FETCH_ASSOC=http://php.net/manual/ja/pdostatement.fetch.php
-  while( $r = $stmt->fetch(PDO::FETCH_ASSOC)){
-    $view .= '<a href="final_detail.php?id='.h($r["id"]).'">';
-    $view .= h($r["id"])."|".h($r["name"]);
+  while( $r = $stmt->fetch(PDO::FETCH_ASSOC)){ 
+    $view .= '<p>';
+    $view .= '<a href="final_detail.php?id='.$r["id"].'">';
+    $view .= $r["id"]."|".$r["name"];
     $view .= '</a>';
-    $view .='<a href="final_delete.php?id='.h($r["id"]).'">';
-    $view .='[削除]';
-    $view .= '</a>';
-    $view .= '<br>';
+    $view .= "　";
+    if($_SESSION["kanri_flg"]=="1"){
+      $view .= '<a class="btn btn-danger" href="final_delete.php?id='.$r["id"].'">';
+      $view .= '[<i class="glyphicon glyphicon-remove"></i>削除]';
+      $view .= '</a>';
+    }
+    $view .= '</p>';
   }
 }
 ?>
@@ -47,16 +48,7 @@ if($status==false) {
 </head>
 <body id="main">
 <!-- Head[Start] -->
-<header>
-  <nav class="navbar navbar-default">
-    <div class="container-fluid">
-      <div class="navbar-header">
-      <a class="navbar-brand" href="final_index.php">データ登録</a>
-      <a class="navbar-brand" href="final_logout.php">ログアウト</a>
-      </div>
-    </div>
-  </nav>
-</header>
+<?php include("final_menu.php"); ?>
 <!-- Head[End] -->
 
 

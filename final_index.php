@@ -1,8 +1,3 @@
-<?php
-session_start();
-?>
-
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -16,13 +11,7 @@ session_start();
 
 
 <!-- Head[Start] -->
-<header>
-  <nav class="navbar navbar-default">
-    <div class="container-fluid">
-    <div class="navbar-header"><a class="navbar-brand" href="final_select.php">データ一覧</a></div>
-    </div>
-  </nav>
-</header>
+<?php include("final_menu.php"); ?>
 <!-- Head[End] -->
 
 <!-- Main[Start] -->

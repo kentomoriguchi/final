@@ -1,18 +1,26 @@
 <?php
-//1. POSTデータ取得
-//$name = filter_input( INPUT_GET, ","name" ); //こういうのもあるよ
-//$email = filter_input( INPUT_POST, "email" ); //こういうのもあるよ
+session_start();
 $name = $_POST['name'];
-
 
 //2. DB接続します
 include("final_funcs.php");
 $pdo = db_conn();
 
 
+
+$file = fileUpload("upfile", "upload"); 
+
+
+if ($file === false) {
+  echo "ファイルのアップロードに失敗しました。";
+  exit();
+}
+
+
 //３．データ登録SQL作成
-$stmt = $pdo->prepare("INSERT INTO gs_final_table(name,indate)VALUES(:name, sysdate());");
+$stmt = $pdo->prepare("INSERT INTO gs_final_table(name,file,indate)VALUES(:name, :file, sysdate());");
 $stmt->bindValue(':name', $name, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
+$stmt->bindValue(':file', $file );
 $status = $stmt->execute();
 
 //４．データ登録処理後

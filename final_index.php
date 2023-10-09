@@ -15,15 +15,21 @@
 <!-- Head[End] -->
 
 <!-- Main[Start] -->
-<form method="post" action="final_insert.php">
+<form method="post" action="final_insert.php" enctype="multipart/form-data">
   <div class="jumbotron">
    <fieldset>
     <legend>データベース</legend>
      <label>会社名：<input type="text" name="name"></label><br>
+     <label><input type="file" name="upfile" multiple></label><br>
      <input type="submit" value="送信">
     </fieldset>
   </div>
 </form>
+
+
+
+
+
 <!-- Main[End] -->
 
 

@@ -33,21 +33,16 @@ if($status==false) {
 <body>
 
 <!-- Head[Start] -->
-<header>
-  <nav class="navbar navbar-default">
-    <div class="container-fluid">
-    <div class="navbar-header"><a class="navbar-brand" href="final_select.php">データ一覧</a></div>
-    </div>
-  </nav>
-</header>
+<?php include("final_menu.php"); ?>
 <!-- Head[End] -->
 
 <!-- Main[Start] -->
-<form method="POST" action="final_update.php">
+<form method="POST" action="final_update.php" enctype="multipart/form-data">
   <div class="jumbotron">
    <fieldset>
     <legend>データベース</legend>
      <label>会社名：<input type="text" name="name" value="<?=$row["name"]?>"></label><br>
+     <label>ファイル：<input type="file" name="upfile" value="<?=$row["file"]?>"></label><br>
      <!-- idを隠して送信 -->
      <input type="hidden" name="id" value="<?=$id?>">
      <!-- idを隠して送信 -->
@@ -56,7 +51,6 @@ if($status==false) {
   </div>
 </form>
 <!-- Main[End] -->
-
 
 </body>
 </html>

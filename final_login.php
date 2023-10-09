@@ -19,17 +19,12 @@
 
 <body class="text-center">
 <form class="form-signin" method="POST" action="final_login_act.php">
-    <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-    <h1 class="h3 mb-3 font-weight-normal">社員番号とパスワードを入力</h1>
+    <img class="mb-4" src="./jpg/logo2.jpg" alt="" width="" height="" style="display: block; margin: auto;">
+    <h1 class="h3 mb-3 font-weight-normal">会社案内データベース</h1>
     <label for="" class="sr-only">社員番号</label>
     <input type="text" name="lid" class="form-control" placeholder="社員番号" required autofocus>
     <label for="inputPassword" class="sr-only">パスワード</label>
     <input type="password" name="lpw" class="form-control" placeholder="パスワード" required>
-    <div class="checkbox mb-3">
-        <label>
-            <input type="checkbox" value="remember-me"> 記憶
-        </label>
-    </div>
     <button class="btn btn-lg btn-primary btn-block" type="submit">ログイン</button>
 </form>
 </body>

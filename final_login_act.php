@@ -33,7 +33,7 @@ if($pw){
   $_SESSION["chk_ssid"]  = session_id();
   $_SESSION["kanri_flg"] = $val['kanri_flg'];
   $_SESSION["name"]      = $val['name'];
-  redirect("final_select.php");
+  redirect("final_home.php");
 }else{
   //Login失敗時(Logout経由)
   redirect("final_login.php");

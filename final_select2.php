@@ -23,11 +23,18 @@ if($status==false) {
   while( $r = $stmt->fetch(PDO::FETCH_ASSOC)){ 
     $view .= '<p>';
     $view .= '<a href="final_detail.php?id='.$r["id"].'">';
-    $view .= $r["id"]."|".$r["name"];
+    $view .= " ■ ";
+    $view .= $r["name"];
     $view .= '</a>';
+    
+    $pdfFileName = $r["file"]; // PDFファイルのファイル名
+    $view .= '<a href="upload/' . $pdfFileName . '" download="' . $pdfFileName . '"> <br>';
+    $view .= $pdfFileName ;
+    $view .= '</a>';
+    
     $view .= "　";
     if($_SESSION["kanri_flg"]=="1"){
-      $view .= '<a class="btn btn-danger" href="final_delete.php?id='.$r["id"].'">';
+      $view .= '<a class="btn btn-danger" href="final_delete.php?id='.$r["id"].'"><br>';
       $view .= '[<i class="glyphicon glyphicon-remove"></i>削除]';
       $view .= '</a>';
     }

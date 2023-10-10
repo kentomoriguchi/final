@@ -31,6 +31,8 @@ if($status==false) {
     $view .= '<a href="upload/' . $pdfFileName . '" download="' . $pdfFileName . '"> <br>';
     $view .= $pdfFileName ;
     $view .= '</a>';
+
+    $view .= '<a href="final_download.php?file=' . $pdfFileName . '">ダウンロード</a>';
     
     $view .= "　";
     if($_SESSION["kanri_flg"]=="1"){

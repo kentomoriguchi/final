@@ -30,6 +30,9 @@ if($status==false) {
     $view .= $pdfFileName ;
     $view .= '</a>';
     
+    $view .= '<a href="final_download.php?file=' . $pdfFileName . '">ダウンロード</a>';
+
+
     $view .= "　";
     if($_SESSION["kanri_flg"]=="1"){
       $view .= '<a class="btn btn-danger" href="final_delete.php?id='.$r["id"].'"><br>';

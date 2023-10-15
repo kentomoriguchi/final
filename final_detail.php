@@ -2,55 +2,75 @@
 session_start();
 
 
-$id = $_GET["id"];
-
+//1. DB接続します
 include("final_funcs.php");
 sschk();
 $pdo = db_conn();
 
-$stmt = $pdo->prepare("SELECT * FROM gs_final_table WHERE id = :id");
-$stmt->bindValue(':id', $id, PDO::PARAM_INT);
+
+//２．データ登録SQL作成
+$stmt = $pdo->prepare("SELECT * FROM gs_final_table ORDER BY name");
 $status = $stmt->execute();
 
-if($status==false) {
-    //execute（SQL実行時にエラーがある場合）
-    sql_error($stmt);
-  }else{
-    $row = $stmt->fetch();
-}
 
+//３．データ表示
+$view="";
+if($status==false) {
+  sql_error($stmt);
+}else{
+  while( $r = $stmt->fetch(PDO::FETCH_ASSOC)){ 
+
+    $pdfFileName = $r["file"]; // PDFファイルのファイル名
+    
+    // ファイル名から "upload/" を削除
+     $pdfFileName = str_replace("upload/", "", $pdfFileName);
+
+    $view .= '<a href="upload/' . $pdfFileName . '" download="' . $pdfFileName . '"> <br>';
+    $view .= $pdfFileName ;
+    $view .= '</a>';
+
+
+    $view .= "　";
+    if($_SESSION["kanri_flg"]=="1"){
+      $view .= '<a class="btn btn-danger" href="final_delete.php?id='.$r["id"].'"><br>';
+      $view .= '[<i class="glyphicon glyphicon-remove"></i>削除]';
+      $view .= '</a>';
+    }
+    $view .= '</p>';
+  }
+}
 ?>
 
 
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <title>データ更新</title>
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <style>div{padding: 10px;font-size:16px;}</style>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>データ一覧</title>
+<link rel="stylesheet" href="css/range.css">
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<style>div{padding: 10px;font-size:16px;}</style>
 </head>
-<body>
-
+<body id="main">
 <!-- Head[Start] -->
 <?php include("final_menu.php"); ?>
 <!-- Head[End] -->
 
+
 <!-- Main[Start] -->
-<form method="POST" action="final_update.php" enctype="multipart/form-data">
-  <div class="jumbotron">
-   <fieldset>
-    <legend>データベース</legend>
-     <label>会社名：<input type="text" name="name" value="<?=$row["name"]?>"></label><br>
-     <label>ファイル：<input type="file" name="upfile" value="<?=$row["file"]?>"></label><br>
-     <!-- idを隠して送信 -->
-     <input type="hidden" name="id" value="<?=$id?>">
-     <!-- idを隠して送信 -->
-     <input type="submit" value="更新">
-    </fieldset>
-  </div>
-</form>
+<div class="container jumbotron" id="view"><?=$view?></div>
 <!-- Main[End] -->
+
+
+
+
+<script>
+</script>
 
 </body>
 </html>
+
+
+

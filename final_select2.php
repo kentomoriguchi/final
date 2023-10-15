@@ -10,7 +10,7 @@ $keyword = $_POST['keyword'];
 
 
 //２．データ登録SQL作成
-$stmt = $pdo->prepare("SELECT * FROM gs_final_table WHERE name LIKE :keyword");
+$stmt = $pdo->prepare("SELECT * FROM gs_final_table WHERE name LIKE :keyword ORDER BY name");
 $stmt->bindValue(':keyword', '%'.$keyword.'%', PDO::PARAM_STR);
 $status = $stmt->execute();
 
@@ -28,11 +28,15 @@ if($status==false) {
     $view .= '</a>';
     
     $pdfFileName = $r["file"]; // PDFファイルのファイル名
+    
+    // ファイル名から "upload/" を削除
+    $pdfFileName = str_replace("upload/", "", $pdfFileName);
+
     $view .= '<a href="upload/' . $pdfFileName . '" download="' . $pdfFileName . '"> <br>';
     $view .= $pdfFileName ;
     $view .= '</a>';
 
-    $view .= '<a href="final_download.php?file=' . $pdfFileName . '">ダウンロード</a>';
+    //$view .= '<a href="final_download.php?file=' . $pdfFileName . '">ダウンロード</a>';
     
     $view .= "　";
     if($_SESSION["kanri_flg"]=="1"){

@@ -9,7 +9,7 @@ $pdo = db_conn();
 
 
 //２．データ登録SQL作成
-$stmt = $pdo->prepare("SELECT * FROM gs_final_table");
+$stmt = $pdo->prepare("SELECT * FROM gs_final_table ORDER BY name");
 $status = $stmt->execute();
 
 
@@ -26,11 +26,16 @@ if($status==false) {
     $view .= '</a>';
     
     $pdfFileName = $r["file"]; // PDFファイルのファイル名
+    
+    // ファイル名から "upload/" を削除
+     $pdfFileName = str_replace("upload/", "", $pdfFileName);
+
+
     $view .= '<a href="upload/' . $pdfFileName . '" download="' . $pdfFileName . '"> <br>';
     $view .= $pdfFileName ;
     $view .= '</a>';
-    
-    $view .= '<a href="final_download.php?file=' . $pdfFileName . '">ダウンロード</a>';
+
+    //$view .= '<a href="final_download.php?file=' . $pdfFileName . '">ダウンロード</a>';
 
 
     $view .= "　";
